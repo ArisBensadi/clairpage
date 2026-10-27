@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClairPage – Scanner PDF hors ligne</title>
+<meta name="description" content="ClairPage : numérisez vos documents en PDF nets, 100 % hors ligne. Rejoignez le test ou installez l'application sur Google Play.">
+<link rel="icon" href="icon.png">
+<style>
+  :root {
+    --bg: #F7F6F2; --card: #FFFFFF; --ink: #1E3A32; --muted: #5F6F68;
+    --brand: #356B5A; --brand-dark: #244F42; --line: #E4E2DB; --soft: #E8EFEB;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121815; --card: #1B231F; --ink: #E7EFEA; --muted: #9AABA3;
+      --brand: #5FA58C; --brand-dark: #4A8F77; --line: #2A3530; --soft: #22302A;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+  .brand img { width: 36px; height: 36px; border-radius: 9px; }
+  .lang { display: flex; background: var(--soft); border-radius: 999px; padding: 3px; }
+  .lang button {
+    border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 13px;
+    font-weight: 600; padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+
+  .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 28px 0 44px; }
+  h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 14px; }
+  .lead { color: var(--muted); font-size: 18px; margin: 0 0 26px; max-width: 30em; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; list-style: none; }
+  .pills li { background: var(--soft); color: var(--brand-dark); font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 999px; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pills li { color: var(--ink); } }
+  .phone { justify-self: center; width: min(100%, 300px); border-radius: 34px; padding: 10px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(30,58,50,.16); }
+  .phone img { display: block; width: 100%; border-radius: 26px; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-bottom: 48px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 24px; display: flex; flex-direction: column; }
+  .card h2 { font-size: 20px; margin: 0 0 6px; }
+  .card p { color: var(--muted); margin: 0 0 18px; font-size: 15px; }
+  .tag { align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--brand); margin-bottom: 10px; }
+  ol { margin: 0 0 20px; padding-left: 20px; color: var(--muted); font-size: 15px; }
+  ol li { margin-bottom: 6px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
+    font-weight: 600; font-size: 15px; border-radius: 14px; padding: 12px 18px; margin-top: auto;
+  }
+  .btn + .btn { margin-top: 10px; }
+  .primary { background: var(--brand); color: #fff; }
+  .primary:hover { background: var(--brand-dark); }
+  .secondary { background: var(--soft); color: var(--ink); }
+  .secondary:hover { filter: brightness(.97); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .note { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+
+  footer { border-top: 1px solid var(--line); padding: 22px 0 34px; color: var(--muted); font-size: 13px; }
+  footer a { color: inherit; }
+  footer p { margin: 4px 0; }
+
+  [data-l="en"] { display: none; }
+  html[lang="en"] [data-l="fr"] { display: none; }
+  html[lang="en"] [data-l="en"] { display: revert; }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 8px; }
+    .phone { width: 240px; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><img src="icon.png" alt="">ClairPage</div>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" data-set="fr" aria-pressed="true">FR</button>
+      <button type="button" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>
+        <span data-l="fr">Vos documents, nets et en PDF. Sans Internet.</span>
+        <span data-l="en">Sharp PDF scans. No internet needed.</span>
+      </h1>
+      <p class="lead">
+        <span data-l="fr">ClairPage détecte les bords de la page, corrige la perspective, efface les ombres et crée des PDF consultables. Tout reste sur votre téléphone.</span>
+        <span data-l="en">ClairPage finds the page edges, fixes perspective, removes shadows and builds searchable PDFs. Everything stays on your phone.</span>
+      </p>
+      <ul class="pills">
+        <li><span data-l="fr">100 % hors ligne</span><span data-l="en">100% offline</span></li>
+        <li><span data-l="fr">Aucun compte</span><span data-l="en">No account</span></li>
+        <li><span data-l="fr">Aucune publicité</span><span data-l="en">No ads</span></li>
+        <li><span data-l="fr">Reconnaissance de texte</span><span data-l="en">Text recognition</span></li>
+      </ul>
+    </div>
+    <div class="phone"><img src="screen.png" alt="Capture d'écran de ClairPage / ClairPage screenshot" width="1080" height="1920"></div>
+  </section>
+
+  <section class="cards">
+    <article class="card">
+      <span class="tag"><span data-l="fr">Version test</span><span data-l="en">Test version</span></span>
+      <h2><span data-l="fr">Devenez testeur</span><span data-l="en">Become a tester</span></h2>
+      <p><span data-l="fr">Aidez-nous à lancer ClairPage : installez la version test et gardez-la 14 jours.</span><span data-l="en">Help us launch ClairPage: install the test version and keep it for 14 days.</span></p>
+      <ol>
+        <li><span data-l="fr">Rejoignez le groupe des testeurs avec votre compte Google (celui de votre téléphone).</span><span data-l="en">Join the testers group with your Google account (the one on your phone).</span></li>
+        <li><span data-l="fr">Acceptez l'invitation au test.</span><span data-l="en">Accept the test invitation.</span></li>
+        <li><span data-l="fr">Installez ClairPage depuis Google Play.</span><span data-l="en">Install ClairPage from Google Play.</span></li>
+      </ol>
+      <a class="btn primary" href="https://groups.google.com/g/clairpage-testers" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+        <span data-l="fr">1. Rejoindre le groupe</span><span data-l="en">1. Join the group</span>
+      </a>
+      <a class="btn secondary" href="https://play.google.com/apps/testing/com.mohaspiringdev.clairpage" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        <span data-l="fr">2. Accepter l'invitation au test</span><span data-l="en">2. Accept the test invitation</span>
+      </a>
+      <p class="note"><span data-l="fr">L'invitation fonctionne quelques minutes après avoir rejoint le groupe.</span><span data-l="en">The invitation works a few minutes after you join the group.</span></p>
+    </article>
+
+    <article class="card">
+      <span class="tag">Google Play</span>
+      <h2><span data-l="fr">Installer l'application</span><span data-l="en">Get the app</span></h2>
+      <p><span data-l="fr">Ouvrez la page ClairPage sur Google Play. Pendant la phase de test, elle n'est visible que pour les testeurs inscrits.</span><span data-l="en">Open ClairPage on Google Play. While testing is under way, the page is visible only to enrolled testers.</span></p>
+      <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.mohaspiringdev.clairpage" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.3.3-.5.8-.5 1.4v16.8c0 .6.2 1.1.5 1.4l9.4-9.8zM14.4 13.4l2.6 2.7-11 6.3c-.4.2-.8.3-1.1.2zM17 7.9l-2.6 2.7L4.9 1.4c.4-.1.8 0 1.1.2zM18.3 8.7l3 1.7c.9.5.9 1.8 0 2.4l-3 1.7-2.8-2.9z"/></svg>
+        <span data-l="fr">Ouvrir dans Google Play</span><span data-l="en">Open in Google Play</span>
+      </a>
+    </article>
+  </section>
+
+  <footer>
+    <p><a href="https://sites.google.com/view/clairpage" target="_blank" rel="noopener"><span data-l="fr">Politique de confidentialité</span><span data-l="en">Privacy policy</span></a> · <span data-l="fr">Contact</span><span data-l="en">Contact</span> : <a href="mailto:bensadi.aris.2022@gmail.com">bensadi.aris.2022@gmail.com</a></p>
+    <p><span data-l="fr">Ce site n'utilise ni cookies ni statistiques. Hébergement : GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis).</span><span data-l="en">This site uses no cookies and no analytics. Hosted on GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).</span></p>
+    <p>Google Play et le logo Google Play sont des marques de Google LLC. / Google Play and the Google Play logo are trademarks of Google LLC.</p>
+  </footer>
+</div>
+<script>
+  (function () {
+    var root = document.documentElement;
+    function set(l) {
+      root.lang = l;
+      document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === l)); });
+      try { localStorage.setItem('lang', l); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    set(saved || ((navigator.language || 'fr').slice(0, 2) === 'fr' ? 'fr' : 'en'));
+    document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.set); }); });
+  })();
+</script>
+</body>
+</html>
